@@ -25,8 +25,7 @@ public class MamontUI : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core", "UMG", "CommonUI"
-				// ... add other public dependencies that you statically link with here ...
+				"Core", "UMG", "CommonUI", "CommonInput"
 			}
 			);
 			
@@ -38,7 +37,6 @@ public class MamontUI : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				// ... add private dependencies that you statically link with here ...	
 			}
 			);
 		
@@ -46,7 +44,6 @@ public class MamontUI : ModuleRules
 		DynamicallyLoadedModuleNames.AddRange(
 			new string[]
 			{
-				// ... add any modules that your module loads dynamically here ...
 			}
 			);
 	}
