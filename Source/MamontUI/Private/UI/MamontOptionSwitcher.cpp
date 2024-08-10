@@ -1,0 +1,66 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "UI/MamontOptionSwitcher.h"
+
+#include "CommonTextBlock.h"
+#include "UI/MamontArrowButton.h"
+
+UMamontOptionSwitcher::UMamontOptionSwitcher(const FObjectInitializer& InInitializer) :
+	Super(InInitializer), SettingName(FText::FromString("SettingName")), SelectedOption(0)
+
+{
+}
+
+void UMamontOptionSwitcher::NativePreConstruct()
+{
+	Super::NativePreConstruct();
+
+	if(Options.IsValidIndex(SelectedOption))
+	{
+		OptionNameText->SetText(Options[SelectedOption]);
+	}
+	
+	SettingNameText->SetText(SettingName);
+
+	RightArrowButton->OnClicked().AddUObject(this, &UMamontOptionSwitcher::OnRightArrowClick);
+	LeftArrowButton->OnClicked().AddUObject(this, &UMamontOptionSwitcher::OnLeftArrowClick);
+
+	UE_LOG(LogTemp, Warning, TEXT("Max - %i"), Options.Max());
+}
+
+void UMamontOptionSwitcher::OnRightArrowClick()
+{
+	if(SelectedOption < Options.Max())
+	{
+		SelectedOption = FMath::Clamp(++SelectedOption, 0, Options.Max());
+	}
+	UpdateOption();
+
+}
+
+void UMamontOptionSwitcher::OnLeftArrowClick()
+{
+	if(SelectedOption > 0)
+	{
+		SelectedOption = FMath::Clamp(--SelectedOption, 0, Options.Max());
+	}
+	UpdateOption();
+
+}
+
+void UMamontOptionSwitcher::SwitchOption(const bool bDecrease)
+{
+	
+}
+
+void UMamontOptionSwitcher::UpdateOption()
+{
+	if(Options.IsValidIndex(SelectedOption))
+	{
+		const FText Option = Options[SelectedOption];
+		OptionNameText->SetText(Option);
+		OnOptionSwitched.Broadcast(Option, SelectedOption);
+	}
+	
+}

@@ -22,7 +22,7 @@ public:
 	void PushPrompt(const FPromptData& InPromptData) const;
 
 	UFUNCTION(BlueprintCallable, Category="UI")
-	void PushMenuWidget() const;
+	void PushMenuWidget(TSubclassOf<UCommonActivatableWidget> InWidgetClass) const;
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="UI|Stack", meta=(BindWidget, AllowPrivateAccess="true"))

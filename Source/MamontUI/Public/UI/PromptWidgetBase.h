@@ -10,7 +10,6 @@
 class UCommonTextBlock;
 class UMamontButtonBase;
 
-
 UINTERFACE(MinimalAPI)
 class UPromptWidgetInterface : public UInterface
 {
@@ -25,11 +24,15 @@ class MAMONTUI_API IPromptWidgetInterface
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Prompt WidgetInterface")
 	void InitPrompt(const FPromptData& InPromptData);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Prompt WidgetInterface")
+	UMamontButtonBase* GetYesButton() const;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Prompt WidgetInterface")
+	UMamontButtonBase* GetNoButton() const;
 	
 };
-/**
- * 
- */
+
 UCLASS()
 class MAMONTUI_API UPromptWidgetBase : public UActivatableWidgetBase, public IPromptWidgetInterface
 {
@@ -41,6 +44,8 @@ public:
 	virtual void NativeOnActivated() override;
 
 	virtual void InitPrompt_Implementation(const FPromptData& InPromptData) override;
+
+	virtual UMamontButtonBase* GetNoButton_Implementation() const override;
 
 private:
 	void OnClickYesButton();

@@ -40,6 +40,12 @@ void UPromptWidgetBase::InitPrompt_Implementation(const FPromptData& InPromptDat
 	
 }
 
+UMamontButtonBase* UPromptWidgetBase::GetNoButton_Implementation() const
+{
+	return NoButton.Get();
+
+}
+
 void UPromptWidgetBase::OnClickYesButton()
 {
 	if(auto* Hud {GetOwningPlayer()->GetHUD()}; Hud && Hud->Implements<UMamontHUDInterface>())

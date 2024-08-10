@@ -24,5 +24,8 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, meta = (BlueprintProtected))
 	void ActionPrompt(const int32 InPromptID, const bool bResult);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Mamont HUD Interface")
+	void OpenOptions();
 	
 };

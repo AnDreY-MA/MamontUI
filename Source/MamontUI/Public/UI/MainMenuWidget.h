@@ -16,13 +16,20 @@ class MAMONTUI_API UMainMenuWidget : public UActivatableWidgetBase
 	GENERATED_BODY()
 
 public:
-	
 	virtual void NativePreConstruct() override;
 
 private:
-	void OnQuit();
+	void OnStartNewGame() const;
+	void OnOpenOptions() const;
+	void OnQuit() const;
 
 private:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Widgets", meta=(BindWidget, AllowPrivateAccess="true"))
+	TObjectPtr<UMamontButtonBase> StartNewGameButton;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Widgets", meta=(BindWidget, AllowPrivateAccess="true"))
+	TObjectPtr<UMamontButtonBase> OptionsButton;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Widgets", meta=(BindWidget, AllowPrivateAccess="true"))
 	TObjectPtr<UMamontButtonBase> QuitButton;
 

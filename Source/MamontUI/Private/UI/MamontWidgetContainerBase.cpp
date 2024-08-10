@@ -4,6 +4,7 @@
 #include "UI/MamontWidgetContainerBase.h"
 
 #include "Blueprint/WidgetBlueprintLibrary.h"
+#include "UI/MamontButtonBase.h"
 #include "UI/PromptWidgetBase.h"
 #include "Widgets/CommonActivatableWidgetContainer.h"
 
@@ -16,8 +17,6 @@ void UMamontWidgetContainerBase::NativeConstruct()
 	PlayerController->SetShowMouseCursor(true);
 	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController, this);
 	
-	PushMenuWidget();
-	
 }
 
 void UMamontWidgetContainerBase::PushPrompt(const FPromptData& InPromptData) const
@@ -27,13 +26,19 @@ void UMamontWidgetContainerBase::PushPrompt(const FPromptData& InPromptData) con
 	if(auto* PromptWidget = PromptStack->AddWidget(PromptWidgetClass); PromptWidget && PromptWidget->Implements<UPromptWidgetInterface>())
 	{
 		IPromptWidgetInterface::Execute_InitPrompt(PromptWidget, InPromptData);
+		const auto* NoButton {IPromptWidgetInterface::Execute_GetNoButton(PromptWidget)};
+		NoButton->OnClicked().AddLambda( [&]
+		{
+			MenuStack->SetVisibility(ESlateVisibility::Visible);
+		});
+		
 		MenuStack->SetVisibility(ESlateVisibility::HitTestInvisible);
 	}
 	
 }
 
-void UMamontWidgetContainerBase::PushMenuWidget() const
+void UMamontWidgetContainerBase::PushMenuWidget(const TSubclassOf<UCommonActivatableWidget> InWidgetClass) const
 {
-	MenuStack->AddWidget(MenuWidgetClass);
+	MenuStack->AddWidget(InWidgetClass);
 	
 }

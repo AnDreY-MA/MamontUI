@@ -6,6 +6,8 @@
 #include "Blueprint/UserWidget.h"
 #include "UI/MamontWidgetContainerBase.h"
 #include "CommonInputSubsystem.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 AMamontHUD::AMamontHUD(const FObjectInitializer& InInitializer) :
@@ -21,6 +23,7 @@ void AMamontHUD::BeginPlay()
 	
 	WidgetContainer = Cast<UMamontWidgetContainerBase>(CreateWidget(GetOwningPlayerController(), WidgetContainerClass));
 	WidgetContainer->AddToViewport();
+	WidgetContainer->PushMenuWidget(MainMenuWidgetClass);
 
 }
 
@@ -44,6 +47,19 @@ void AMamontHUD::ActionPrompt_Implementation(const int32 InPromptID, const bool 
 	}
 }
 
+void AMamontHUD::StartNewGame_Implementation()
+{
+	auto* PlayerController {GetOwningPlayerController()};
+	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController);
+	UGameplayStatics::OpenLevelBySoftObjectPtr(this, NewGameLevel);
+}
+
+void AMamontHUD::OpenOptions_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("OPEN"));
+	WidgetContainer->PushMenuWidget(SettingsWidgetClass);
+	
+}
 
 void AMamontHUD::QuitGame()
 {

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "MamontHUDInterface.h"
 #include "GameFramework/HUD.h"
+#include "HUD/HUDMainMenuInterface.h"
 #include "UI/MamontWidgetContainerBase.h"
 #include "MamontHUD.generated.h"
 
@@ -12,7 +13,7 @@
  * 
  */
 UCLASS()
-class MAMONTUI_API AMamontHUD : public AHUD, public IMamontHUDInterface
+class MAMONTUI_API AMamontHUD : public AHUD, public IMamontHUDInterface, public IHUDMainMenuInterface
 {
 	GENERATED_BODY()
 
@@ -25,6 +26,11 @@ public:
 
 	virtual void ActionPrompt_Implementation(const int32 InPromptID, const bool bResult) override;
 
+	// IHUDMainMenuInterface Implementation
+	virtual void StartNewGame_Implementation() override;
+
+	virtual void OpenOptions_Implementation() override;
+
 protected:
 	virtual void BeginPlay() override;
 	
@@ -34,6 +40,15 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="UI")
 	TSubclassOf<UUserWidget> WidgetContainerClass;
+
+	UPROPERTY(EditDefaultsOnly, Category="UI")
+	TSubclassOf<UCommonActivatableWidget> MainMenuWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, Category="UI")
+	TSubclassOf<UCommonActivatableWidget> SettingsWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSoftObjectPtr<UWorld> NewGameLevel;
 	
 	UPROPERTY()
 	TObjectPtr<UMamontWidgetContainerBase> WidgetContainer;
