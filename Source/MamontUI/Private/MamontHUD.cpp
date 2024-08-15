@@ -7,12 +7,14 @@
 #include "UI/MamontWidgetContainerBase.h"
 #include "CommonInputSubsystem.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Components/SettingControlComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 AMamontHUD::AMamontHUD(const FObjectInitializer& InInitializer) :
 	Super(InInitializer), WidgetContainerClass(nullptr), WidgetContainer(nullptr)
 {
+	SettingControlComponent = CreateDefaultSubobject<USettingControlComponent>("SettingControlComponent");
 }
 
 void AMamontHUD::BeginPlay()
@@ -25,6 +27,13 @@ void AMamontHUD::BeginPlay()
 	WidgetContainer->AddToViewport();
 	WidgetContainer->PushMenuWidget(MainMenuWidgetClass);
 
+}
+
+void AMamontHUD::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	WidgetContainer->RemoveFromParent();
 }
 
 void AMamontHUD::ShowPrompt_Implementation(const FPromptData& InPromptData)
@@ -59,6 +68,11 @@ void AMamontHUD::OpenOptions_Implementation()
 	UE_LOG(LogTemp, Warning, TEXT("OPEN"));
 	WidgetContainer->PushMenuWidget(SettingsWidgetClass);
 	
+}
+
+USettingControlComponent* AMamontHUD::GetSettingComponent_Implementation() const
+{
+	return SettingControlComponent.Get();
 }
 
 void AMamontHUD::QuitGame()
