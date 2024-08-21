@@ -50,3 +50,19 @@ void USettingControlComponent::ApplySetting()
 	GameSetting->ApplySettings(false);
 	
 }
+
+void USettingControlComponent::ChangeVSync(bool bChecked)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	check(GameSetting);
+	GameSetting->SetVSyncEnabled(bChecked);
+	GameSetting->ApplyNonResolutionSettings();
+	
+}
+
+void USettingControlComponent::ChangeAudioVolume(const FName& InNameAudio, const float InValue)
+{
+	if(!MixMaps.Contains(InNameAudio)) return;
+
+	
+}

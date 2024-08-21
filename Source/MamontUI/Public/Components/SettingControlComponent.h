@@ -20,5 +20,12 @@ public:
 
 	void ApplySetting();
 	
-		
+	void ChangeVSync(bool bChecked);
+
+	void ChangeAudioVolume(const FName& InNameAudio, const float InValue);
+
+private:
+	UPROPERTY(EditDefaultsOnly, Category="Settings|Audio")
+	TMap<FName, TObjectPtr<USoundMix>> MixMaps;
+	
 };

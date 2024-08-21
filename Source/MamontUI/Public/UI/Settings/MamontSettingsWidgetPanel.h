@@ -7,6 +7,7 @@
 #include "CommonTabListWidgetBase.h"
 #include "MamontSettingsWidgetPanel.generated.h"
 
+class UAudioSettingPanel;
 class UVideoSettingsPanel;
 class UCommonActivatableWidgetSwitcher;
 
@@ -24,6 +25,9 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(BindWidget, AllowPrivateAccess="true"))
 	TObjectPtr<UVideoSettingsPanel> VideoSettingsPanel;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(BindWidget, AllowPrivateAccess="true"))
+	TObjectPtr<UAudioSettingPanel> AudioSettingPanel;
 
 	
 };

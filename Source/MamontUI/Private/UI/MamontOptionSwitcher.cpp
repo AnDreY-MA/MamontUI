@@ -6,6 +6,8 @@
 #include "CommonTextBlock.h"
 #include "UI/MamontArrowButton.h"
 
+#include UE_INLINE_GENERATED_CPP_BY_NAME(MamontOptionSwitcher)
+
 UMamontOptionSwitcher::UMamontOptionSwitcher(const FObjectInitializer& InInitializer) :
 	Super(InInitializer), SettingName(FText::FromString("SettingName")), SelectedOption(0)
 

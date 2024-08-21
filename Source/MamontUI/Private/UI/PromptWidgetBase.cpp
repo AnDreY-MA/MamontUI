@@ -6,11 +6,9 @@
 #include "CommonTextBlock.h"
 #include "UI/MamontButtonBase.h"
 #include "MamontHUDInterface.h"
-#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "GameFramework/HUD.h"
 #include "UI/MamontWidgetContainerBase.h"
 #include "Widgets/CommonActivatableWidgetContainer.h"
-
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(PromptWidgetBase)
 
