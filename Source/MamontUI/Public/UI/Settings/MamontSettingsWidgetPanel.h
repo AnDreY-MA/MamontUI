@@ -17,7 +17,6 @@ class MAMONTUI_API UMamontSettingsWidgetPanel : public UActivatableWidgetBase
 {
 	GENERATED_BODY()
 
-public:
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(BindWidget, AllowPrivateAccess="true"))

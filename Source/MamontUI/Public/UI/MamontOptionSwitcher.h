@@ -11,7 +11,7 @@ class UCommonTextBlock;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnOptionSwitched, const FText&, OptionText, const int32, OptionID);
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class MAMONTUI_API UMamontOptionSwitcher : public UActivatableWidgetBase
 {
 	GENERATED_BODY()
@@ -20,6 +20,9 @@ public:
 	explicit UMamontOptionSwitcher(const FObjectInitializer& InInitializer = FObjectInitializer::Get());
 
 	virtual void NativePreConstruct() override;
+
+	UFUNCTION(BlueprintCallable)
+	void SetOption(const FText& InOptionText, const int32 InOptionID);
 
 	UPROPERTY(BlueprintAssignable)
 	FOnOptionSwitched OnOptionSwitched;

@@ -4,8 +4,6 @@
 #include "UI/Settings/VideoSettingsPanel.h"
 
 #include "Components/SettingControlComponent.h"
-#include "GameFramework/HUD.h"
-#include "Interfaces/SettingControlComponentInterface.h"
 #include "UI/MamontButtonBase.h"
 #include "UI/MamontOptionCheckBoxBase.h"
 #include "UI/MamontOptionSwitcher.h"
@@ -49,22 +47,5 @@ void UVideoSettingsPanel::OnAppled()
 {
 	auto* SettingComponent{TryGetSettingComponent()};
 	SettingComponent->ApplySetting();
-	
-}
-
-USettingControlComponent* UVideoSettingsPanel::TryGetSettingComponent() const
-{
-	const auto* Player{GetOwningPlayer()};
-	check(Player);
-	
-	const auto* Hud{Player->GetHUD()};
-	check(Hud);
-	
-	if(Hud->Implements<USettingControlComponentInterface>())
-	{
-		return ISettingControlComponentInterface::Execute_GetSettingComponent(Hud);
-	}
-	
-	return Hud->FindComponentByClass<USettingControlComponent>();
 	
 }

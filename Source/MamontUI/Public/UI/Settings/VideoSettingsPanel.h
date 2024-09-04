@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ActivatableWidgetBase.h"
+#include "SettingPanelBase.h"
 #include "VideoSettingsPanel.generated.h"
 
 class UMamontOptionCheckBoxBase;
@@ -12,8 +12,8 @@ class UMamontOptionSwitcher;
 /**
  * 
  */
-UCLASS()
-class MAMONTUI_API UVideoSettingsPanel : public UActivatableWidgetBase
+UCLASS(Abstract)
+class MAMONTUI_API UVideoSettingsPanel : public USettingPanelBase
 {
 	GENERATED_BODY()
 
@@ -22,19 +22,17 @@ public:
 	virtual void NativePreConstruct() override;
 
 private:
+	void OnAppled();
+
+	UFUNCTION()
+	void OnVSyncChanged(const bool bChecked);
+	
 	UFUNCTION()
 	void OnWindowModeChanged(const FText& OptionText, const int32 OptionID);
 	
 	UFUNCTION()
 	void OnResolutionChanged(const FText& OptionText, const int32 OptionID);
-
-	UFUNCTION()
-	void OnVSyncChanged(const bool bChecked);
-
-	void OnAppled();
-
-	class USettingControlComponent* TryGetSettingComponent() const;
-
+	
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(BindWidget, AllowPrivateAccess="true"))
 	TObjectPtr<UMamontOptionSwitcher> ResolutionSwitcher;

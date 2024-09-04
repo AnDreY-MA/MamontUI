@@ -6,7 +6,8 @@
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-USettingControlComponent::USettingControlComponent()
+USettingControlComponent::USettingControlComponent(const FObjectInitializer& InInitializer) :
+	Super(InInitializer)
 {
 	PrimaryComponentTick.bCanEverTick = false;
 
@@ -65,4 +66,68 @@ void USettingControlComponent::ChangeAudioVolume(const FName& InNameAudio, const
 	if(!MixMaps.Contains(InNameAudio)) return;
 
 	
+}
+
+void USettingControlComponent::SetOverallScalabilityLevel(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	check(GameSetting);
+	GameSetting->SetOverallScalabilityLevel(InValue);
+
+}
+
+void USettingControlComponent::ChangeTextureQuality(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	GameSetting->SetTextureQuality(InValue);
+	GameSetting->ApplyNonResolutionSettings();
+}
+
+void USettingControlComponent::ChangeVisibilityQuality(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+//	GameSetting->Set(InValue);
+	GameSetting->ApplyNonResolutionSettings();
+}
+
+void USettingControlComponent::ChangeAntialiasingQuality(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	GameSetting->SetAntiAliasingQuality(InValue);
+	GameSetting->ApplyNonResolutionSettings();
+}
+
+void USettingControlComponent::ChangeShadowQuality(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	GameSetting->SetShadowQuality(InValue);
+	GameSetting->ApplyNonResolutionSettings();
+}
+
+void USettingControlComponent::ChangePostProcessingQuality(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	GameSetting->SetPostProcessingQuality(InValue);
+	GameSetting->ApplyNonResolutionSettings();
+}
+
+void USettingControlComponent::ChangeEffectQuality(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	GameSetting->SetVisualEffectQuality(InValue);
+	GameSetting->ApplyNonResolutionSettings();
+}
+
+void USettingControlComponent::ChangeShadingQuality(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	GameSetting->SetShadingQuality(InValue);
+	GameSetting->ApplyNonResolutionSettings();
+}
+
+void USettingControlComponent::ChangeVegetationQuality(const int32 InValue)
+{
+	auto* GameSetting{UGameUserSettings::GetGameUserSettings()};
+	GameSetting->SetFoliageQuality(InValue);
+	GameSetting->ApplyNonResolutionSettings();
 }

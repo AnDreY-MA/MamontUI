@@ -8,7 +8,6 @@
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(MamontOptionCheckBoxBase)
 
-
 UMamontOptionCheckBoxBase::UMamontOptionCheckBoxBase(const FObjectInitializer& InInitializer)
 	: Super(InInitializer), SettingName(FText::FromString("{CheckBox}")), CheckStatus(ECheckBoxState::Unchecked), bChecked(false), bCanInteract(false)
 {

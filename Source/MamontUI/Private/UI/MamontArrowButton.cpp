@@ -5,6 +5,8 @@
 
 #include "Components/Image.h"
 
+#include UE_INLINE_GENERATED_CPP_BY_NAME(MamontArrowButton)
+
 void UMamontArrowButton::NativePreConstruct()
 {
 	Super::NativePreConstruct();

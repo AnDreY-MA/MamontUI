@@ -3,10 +3,11 @@
 
 #include "UI/Settings/MamontWidgetSettings.h"
 
-#include "UI/MamontTabListWidgetBase.h"
 #include "UI/Settings/MamontSettingsWidgetPanel.h"
-#include "CommonTabListWidgetBase.h"
 #include "CommonAnimatedSwitcher.h"
+
+#include UE_INLINE_GENERATED_CPP_BY_NAME(MamontWidgetSettings)
+
 
 void UMamontWidgetSettings::NativeConstruct()
 {

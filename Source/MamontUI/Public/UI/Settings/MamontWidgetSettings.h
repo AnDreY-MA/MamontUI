@@ -22,7 +22,7 @@ struct FTabData
 	
 };
 
-UCLASS()
+UCLASS(Abstract, Blueprintable)
 class MAMONTUI_API UMamontWidgetSettings : public UActivatableWidgetBase
 {
 	GENERATED_BODY()

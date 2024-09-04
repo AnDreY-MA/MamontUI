@@ -9,7 +9,7 @@
 #include UE_INLINE_GENERATED_CPP_BY_NAME(MamontOptionSwitcher)
 
 UMamontOptionSwitcher::UMamontOptionSwitcher(const FObjectInitializer& InInitializer) :
-	Super(InInitializer), SettingName(FText::FromString("SettingName")), SelectedOption(0)
+	Super(InInitializer), SelectedOption(0)
 
 {
 }
@@ -28,7 +28,12 @@ void UMamontOptionSwitcher::NativePreConstruct()
 	RightArrowButton->OnClicked().AddUObject(this, &UMamontOptionSwitcher::OnRightArrowClick);
 	LeftArrowButton->OnClicked().AddUObject(this, &UMamontOptionSwitcher::OnLeftArrowClick);
 
-	UE_LOG(LogTemp, Warning, TEXT("Max - %i"), Options.Max());
+}
+
+void UMamontOptionSwitcher::SetOption(const FText& InOptionText, const int32 InOptionID)
+{
+	OptionNameText->SetText(InOptionText);
+	SelectedOption = InOptionID;
 }
 
 void UMamontOptionSwitcher::OnRightArrowClick()
