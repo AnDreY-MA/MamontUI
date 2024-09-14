@@ -23,4 +23,5 @@ USettingControlComponent* USettingPanelBase::TryGetSettingComponent() const
 	}
 	
 	return Hud->FindComponentByClass<USettingControlComponent>();
+
 }

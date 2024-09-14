@@ -18,8 +18,7 @@ class MAMONTUI_API UVideoSettingsPanel : public USettingPanelBase
 	GENERATED_BODY()
 
 public:
-	
-	virtual void NativePreConstruct() override;
+	virtual void NativeConstruct() override;
 
 private:
 	void OnAppled();

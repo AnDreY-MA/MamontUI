@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "CoreMinimal.h"
 #include "PromptData.generated.h"
 
 USTRUCT(BlueprintType)

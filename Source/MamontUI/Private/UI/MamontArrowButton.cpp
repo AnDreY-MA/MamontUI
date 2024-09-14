@@ -11,8 +11,11 @@ void UMamontArrowButton::NativePreConstruct()
 {
 	Super::NativePreConstruct();
 
-	Image->SetBrushFromTexture(ArrowImage.Get());
-	Image->SetRenderTranslation(FVector2D(0.0, 0.0));
+	if(Image)
+	{
+		Image->SetBrushFromTexture(ArrowImage.Get());
+		Image->SetRenderTranslation(FVector2D(0.0, 0.0));
+	}
 	
 }
 

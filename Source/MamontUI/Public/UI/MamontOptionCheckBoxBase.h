@@ -21,6 +21,8 @@ public:
 	
 	virtual void NativePreConstruct() override;
 
+	virtual void NativeConstruct() override;
+
 	UPROPERTY()
 	FOnCheckBoxChanged OnCheckBoxChanged;
 

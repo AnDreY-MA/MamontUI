@@ -8,26 +8,20 @@
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(MamontOptionSwitcher)
 
-UMamontOptionSwitcher::UMamontOptionSwitcher(const FObjectInitializer& InInitializer) :
-	Super(InInitializer), SelectedOption(0)
-
-{
-}
-
 void UMamontOptionSwitcher::NativePreConstruct()
 {
-	Super::NativePreConstruct();
+	NameBlock->SetText(Name);
 
 	if(Options.IsValidIndex(SelectedOption))
 	{
 		OptionNameText->SetText(Options[SelectedOption]);
 	}
-	
-	SettingNameText->SetText(SettingName);
+}
 
-	RightArrowButton->OnClicked().AddUObject(this, &UMamontOptionSwitcher::OnRightArrowClick);
-	LeftArrowButton->OnClicked().AddUObject(this, &UMamontOptionSwitcher::OnLeftArrowClick);
-
+void UMamontOptionSwitcher::NativeConstruct()
+{
+	LeftArrowButton->OnClicked().AddUObject(this, &UMamontOptionSwitcher::OnLeftButton);
+	RightArrowButton->OnClicked().AddUObject(this, &UMamontOptionSwitcher::OnRightButton);
 }
 
 void UMamontOptionSwitcher::SetOption(const FText& InOptionText, const int32 InOptionID)
@@ -36,29 +30,22 @@ void UMamontOptionSwitcher::SetOption(const FText& InOptionText, const int32 InO
 	SelectedOption = InOptionID;
 }
 
-void UMamontOptionSwitcher::OnRightArrowClick()
-{
-	if(SelectedOption < Options.Max())
-	{
-		SelectedOption = FMath::Clamp(++SelectedOption, 0, Options.Max());
-	}
-	UpdateOption();
-
-}
-
-void UMamontOptionSwitcher::OnLeftArrowClick()
+void UMamontOptionSwitcher::OnLeftButton()
 {
 	if(SelectedOption > 0)
 	{
 		SelectedOption = FMath::Clamp(--SelectedOption, 0, Options.Max());
 	}
 	UpdateOption();
-
 }
 
-void UMamontOptionSwitcher::SwitchOption(const bool bDecrease)
+void UMamontOptionSwitcher::OnRightButton()
 {
-	
+	if(SelectedOption < Options.Max())
+	{
+		SelectedOption = FMath::Clamp(++SelectedOption, 0, Options.Max());
+	}
+	UpdateOption();
 }
 
 void UMamontOptionSwitcher::UpdateOption()
@@ -69,5 +56,5 @@ void UMamontOptionSwitcher::UpdateOption()
 		OptionNameText->SetText(Option);
 		OnOptionSwitched.Broadcast(Option, SelectedOption);
 	}
-	
+
 }

@@ -19,8 +19,12 @@ void UMamontOptionCheckBoxBase::NativePreConstruct()
 
 	NameTextBox->SetText(SettingName);
 	CheckBox->SetCheckedState(CheckStatus);
-	CheckBox->OnCheckStateChanged.AddDynamic(this, &UMamontOptionCheckBoxBase::CheckBoxChanged);
 	
+}
+
+void UMamontOptionCheckBoxBase::NativeConstruct()
+{
+	CheckBox->OnCheckStateChanged.AddDynamic(this, &UMamontOptionCheckBoxBase::CheckBoxChanged);
 }
 
 void UMamontOptionCheckBoxBase::CheckBoxChanged(bool bIsChecked)
