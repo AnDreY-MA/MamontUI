@@ -25,6 +25,10 @@ public:
 	UPROPERTY()
 	FOnSliderValueChanged OnSliderValueChanged;
 
+	const FName& GetMixName() const { return MixName; }
+
+	const float GetCurrentValue() const { return CurrentValue; }
+
 private:
 	UFUNCTION()
 	void SliderValueChanged(float Value);

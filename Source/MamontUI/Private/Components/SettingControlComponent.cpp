@@ -5,6 +5,9 @@
 
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include <Kismet/GameplayStatics.h>
+#include <Sound/SoundMix.h>
+
 
 USettingControlComponent::USettingControlComponent(const FObjectInitializer& InInitializer) :
 	Super(InInitializer)
@@ -63,8 +66,12 @@ void USettingControlComponent::ChangeVSync(bool bChecked)
 
 void USettingControlComponent::ChangeAudioVolume(const FName& InNameAudio, const float InValue)
 {
-	if(!MixMaps.Contains(InNameAudio)) return;
+	if(!MixClassMap.Contains(InNameAudio)) return;
 
+	UGameplayStatics::SetSoundMixClassOverride(GetWorld(), SoundMix, *MixClassMap.Find(InNameAudio), InValue);
+	UGameplayStatics::PushSoundMixModifier(GetWorld(), SoundMix);
+
+	UE_LOG(LogTemp, Warning, TEXT("Audio - %s, Value= %f"), *InNameAudio.ToString(), InValue);
 	
 }
 

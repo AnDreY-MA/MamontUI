@@ -6,6 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "SettingControlComponent.generated.h"
 
+class USoundMix;
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MAMONTUI_API USettingControlComponent : public UActorComponent
@@ -36,7 +38,12 @@ public:
 	void ChangeVegetationQuality(const int32 InValue);
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category="Settings|Audio")
-	TMap<FName, TObjectPtr<USoundMix>> MixMaps;
+	UPROPERTY(EditDefaultsOnly, Category = "Settings|Audio")
+	TObjectPtr<USoundMix> SoundMix;
+	UPROPERTY(EditDefaultsOnly, Category = "Settings|Audio")
+	TMap<FName, USoundClass*> MixClassMap;
+//private:
+//	UPROPERTY(EditDefaultsOnly, Category="Settings|Audio")
+//	TMap<FName, TObjectPtr<USoundClass> ClassMixMap;
 	
 };

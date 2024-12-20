@@ -41,5 +41,8 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio Setting", meta=(BindWidget, AllowPrivateAccess=true))
 	TObjectPtr<UMamontSliderBase> UISlider;
+
+	UPROPERTY()
+	float Master{ 1.0f };
 	
 };

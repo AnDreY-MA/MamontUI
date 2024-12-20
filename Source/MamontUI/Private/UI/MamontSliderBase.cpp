@@ -4,6 +4,7 @@
 
 #include "CommonTextBlock.h"
 #include "Components/Slider.h"
+#include <Kismet/KismetMathLibrary.h>
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(MamontSliderBase)
 
@@ -33,7 +34,8 @@ void UMamontSliderBase::SliderValueChanged(float Value)
 {
 	CurrentValue = Value;
 	Slider->SetValue(CurrentValue);
-	ValueTextBox->SetText(FText::AsNumber(CurrentValue * VisualMultiplyer));
+	const float VisualValue = UKismetMathLibrary::Round(CurrentValue * VisualMultiplyer);
+	ValueTextBox->SetText(FText::AsNumber(VisualValue));
 	if(OnSliderValueChanged.IsBound())
 	{
 		OnSliderValueChanged.Broadcast(MixName, CurrentValue);

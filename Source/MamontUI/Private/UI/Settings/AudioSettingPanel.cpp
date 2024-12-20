@@ -41,7 +41,18 @@ USettingControlComponent* UAudioSettingPanel::TryGetSettingComponent() const
 
 void UAudioSettingPanel::OnSliderChanged(const FName& NameSlider, const float Value)
 {
-	auto* SettingComponent{TryGetSettingComponent()};
-	SettingComponent->ChangeAudioVolume(NameSlider, Value);
+	auto* SettingComponent{ TryGetSettingComponent() };
+
+	if (NameSlider == MasterSlider->GetMixName())
+	{
+		SettingComponent->ChangeAudioVolume(MasterSlider->GetMixName(), Value);
+		SettingComponent->ChangeAudioVolume(MusicSlider->GetMixName(), Value * MusicSlider->GetCurrentValue());
+		SettingComponent->ChangeAudioVolume(VoiceSlider->GetMixName(), Value * VoiceSlider->GetCurrentValue());
+		SettingComponent->ChangeAudioVolume(SoundEffectSlider->GetMixName(), Value * SoundEffectSlider->GetCurrentValue());
+		SettingComponent->ChangeAudioVolume(UISlider->GetMixName(), Value * UISlider->GetCurrentValue());
+		return;
+	}
+	const float CurrentValue = Value * MasterSlider->GetCurrentValue();
+	SettingComponent->ChangeAudioVolume(NameSlider, CurrentValue);
 	
 }
