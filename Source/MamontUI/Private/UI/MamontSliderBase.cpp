@@ -9,7 +9,7 @@
 #include UE_INLINE_GENERATED_CPP_BY_NAME(MamontSliderBase)
 
 UMamontSliderBase::UMamontSliderBase(const FObjectInitializer& InInitializer) :
-	Super(InInitializer), SettingName(FText::FromString("{SettingName}")), MixName("MixName"), MinValue(0), MaxValue(1), CurrentValue(0), StepSize(0.01), ControllerStepSize(1),
+	Super(InInitializer), SettingName(FText::FromString("{SettingName}")), MixName("MixName"), MinValue(0), MaxValue(1), CurrentValue(1), StepSize(0.01), ControllerStepSize(1),
 	VisualMultiplyer(1)
 {
 }
@@ -26,7 +26,7 @@ void UMamontSliderBase::NativePreConstruct()
 	Slider->SetStepSize(StepSize);
 	Slider->OnValueChanged.AddDynamic(this, &UMamontSliderBase::SliderValueChanged);
 
-	ValueTextBox->SetText(FText::AsNumber(CurrentValue));
+	ValueTextBox->SetText(FText::AsNumber(CurrentValue * VisualMultiplyer));
 	
 }
 

@@ -13,13 +13,16 @@
 void UAudioSettingPanel::NativePreConstruct()
 {
 	Super::NativePreConstruct();
+	
+}
 
+void UAudioSettingPanel::NativeConstruct()
+{
 	MasterSlider->OnSliderValueChanged.AddDynamic(this, &UAudioSettingPanel::OnSliderChanged);
 	MusicSlider->OnSliderValueChanged.AddDynamic(this, &UAudioSettingPanel::OnSliderChanged);
 	VoiceSlider->OnSliderValueChanged.AddDynamic(this, &UAudioSettingPanel::OnSliderChanged);
 	SoundEffectSlider->OnSliderValueChanged.AddDynamic(this, &UAudioSettingPanel::OnSliderChanged);
 	UISlider->OnSliderValueChanged.AddDynamic(this, &UAudioSettingPanel::OnSliderChanged);
-
 }
 
 USettingControlComponent* UAudioSettingPanel::TryGetSettingComponent() const

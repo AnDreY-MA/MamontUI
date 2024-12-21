@@ -16,7 +16,7 @@ class MAMONTUI_API UMainMenuWidget : public UActivatableWidgetBase
 	GENERATED_BODY()
 
 public:
-	virtual void NativePreConstruct() override;
+	virtual void NativeConstruct() override;
 
 private:
 	void OnStartNewGame() const;

@@ -20,6 +20,8 @@ public:
 	
 	virtual void NativePreConstruct() override;
 
+	virtual void NativeConstruct() override;
+
 private:
 	USettingControlComponent* TryGetSettingComponent() const;
 

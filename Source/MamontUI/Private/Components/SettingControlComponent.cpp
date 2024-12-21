@@ -71,7 +71,7 @@ void USettingControlComponent::ChangeAudioVolume(const FName& InNameAudio, const
 	UGameplayStatics::SetSoundMixClassOverride(GetWorld(), SoundMix, *MixClassMap.Find(InNameAudio), InValue);
 	UGameplayStatics::PushSoundMixModifier(GetWorld(), SoundMix);
 
-	UE_LOG(LogTemp, Warning, TEXT("Audio - %s, Value= %f"), *InNameAudio.ToString(), InValue);
+	//UE_LOG(LogTemp, Warning, TEXT("Audio - %s, Value= %f"), *InNameAudio.ToString(), InValue);
 	
 }
 

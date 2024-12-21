@@ -11,25 +11,22 @@
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(MainMenuWidget)
 
-void UMainMenuWidget::NativePreConstruct()
+void UMainMenuWidget::NativeConstruct()
 {
-	Super::NativePreConstruct();
-
 	StartNewGameButton->OnClicked().AddUObject(this, &UMainMenuWidget::OnStartNewGame);
 	OptionsButton->OnClicked().AddUObject(this, &UMainMenuWidget::OnOpenOptions);
 	QuitButton->OnClicked().AddUObject(this, &UMainMenuWidget::OnQuit);
 
-	if(auto* FocusTarget {GetDesiredFocusTarget()}; FocusTarget)
+	if (auto* FocusTarget{ GetDesiredFocusTarget() }; FocusTarget)
 	{
 		FocusTarget->SetFocus();
 	}
-	
-	auto* PlayerController{GetOwningPlayer()};
-	if(!PlayerController) return;
-	
+
+	auto* PlayerController{ GetOwningPlayer() };
+	if (!PlayerController) return;
+
 	PlayerController->SetShowMouseCursor(true);
 	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController, this);
-	
 }
 
 void UMainMenuWidget::OnStartNewGame() const
